@@ -14,6 +14,7 @@ This script automates the process of creating and managing users and groups on a
     - [Input File (`users_info.txt`)](#input-file-users_infotxt)
     - [Log File (`/var/log/user_management.log`)](#log-file-varloguser_managementlog)
     - [Password File (`/var/secure/user_passwords.txt`)](#password-file-varsecureuser_passwordstxt)
+    - [Verification](#verification)
   - [Logging](#logging)
   - [Permissions](#permissions)
   - [Troubleshooting](#troubleshooting)
@@ -84,6 +85,57 @@ This script automates the process of creating and managing users and groups on a
   john_doe,randomPassword123
   jane_smith,anotherRandomPassword456
   ```
+
+### Verification
+
+1. Check the Log File `/var/log/user_management.log`
+
+```sh
+sudo cat /var/log/user_management.log
+```
+
+2. Verify User Creation
+
+```sh
+getent passwd <username>
+```
+
+3. Alternatively, you can list all users to see if the new users are included:
+
+```sh
+cut -d: -f1 /etc/passwd
+```
+
+4. Verify Group Creation and Membership
+
+```sh
+getent group <groupname>
+groups <username>
+```
+
+5. Check the Passwords File `(/var/secure/user_passwords.txt)`
+
+```sh
+sudo cat /var/secure/user_passwords.txt
+```
+
+6. Verify that this file contains the correct entries:
+
+```sh
+sudo cat /var/secure/user_passwords.txt
+```
+
+7. Check Permissions and Ownership
+
+```sh
+ls -ld /home/<username>
+```
+
+8. Test Login with the Generated Password
+
+```sh
+su - <username>
+```
 
 ## Logging
 
